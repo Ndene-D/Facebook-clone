@@ -20,7 +20,8 @@ function Feed() {
 
   useEffect(() => {
     // getData();
-    const docs = onSnapshot(collection(db, "post"), (snapshot) =>
+    const q = query(collection(db, "post"), orderBy("timestamp", "desc"));
+    const docs = onSnapshot(q, (snapshot) =>
       setPosts(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })))
     );
   }, []);
